@@ -1,1 +1,9 @@
 # configs/params
+
+
+# ==================版本信息====================
+metadata: 
+  config_version: "0.0.1"
+  create_date: "2025-04-19"
+  author: "zeoyzhao"
+  git_commit: "a1b2c3d4"
