@@ -31,3 +31,21 @@ protein_structure_prediction/
 ├── train_binding.py        # 结合亲和力训练脚本
 ├── requirements.txt        # 依赖库（包含Biopython、PyTorch Geometric）
 └── README.md               # 项目说明（含可视化示例）
+
+### 安装 PyTorch Geometric 依赖库
+根据 PyTorch 和 CUDA 版本替换 ${CUDA} 和 ${TORCH}：
+
+${CUDA}：cu117（CUDA 11.7）、cu118（CUDA 11.8）或 cpu。
+
+${TORCH}：如 2.0.0。
+
+```bash
+pip install torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+
+pip install torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-1.13.1+cpu.html
+```
+
+4. 安装 torch_geometric
+```bash
+pip install torch_geometric
+```
