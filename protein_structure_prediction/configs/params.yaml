@@ -7,3 +7,78 @@ metadata:
   create_date: "2025-04-19"
   author: "zeoyzhao"
   git_commit: "a1b2c3d4"
+
+
+# ==================系统级配置====================
+system:
+  seed: 42                  # 随机种子（确保可复现性）
+
+# ==================数据配置====================
+data:
+  # 路径配置
+  train_dir: "data/PDB/train"   # 训练集路径（已经处理的PyG格式的数据）
+  val_dir: "data/PDB/val"       # 验证集路径
+  pdb_raw_dir: "data/PDB/raw"   # 原始PBD文件路径
+
+  # 特征工程
+  max_seq_len: 512              # 最大序列长度，超过则截断
+  coordinate_system: "backbone" # 坐标体系值[backbone/full_atom]
+
+  # 数据加载
+  batch_se: 32               # 每个GPU的批大小
+  
+  # 数据增强
+  augmentations:
+    random_rotation: False    # 随机旋转增强（SE(3)等变性）
+
+
+# ==================模型架构====================
+model:
+  # 序列编码器（Transformer）
+  seq_encoder:
+    d_model: 512
+
+  # 蛋白质结构预测配置
+  protein_gnn:
+    type: "gat"                 # 模型类型（gat/gcn/gin）
+
+
+# ==================训练配置====================
+training:
+  # 优化器
+  optimizer: ''
+
+
+# ==================评估指标====================
+metrics:
+  primary: "TM-Score"
+
+# ==================日志与保存====================
+logging:
+  # TensorBoard
+  log_dir: "results/tb_logs"
+  log_interval: 50                     # 步级日志间隔
+
+  # 模型检查点
+  checkpoint_dir: "results/checkpoints"
+
+  # 预测结果
+  output_dir: "results/predictions"
+  save_pdb: True                       # 是否输出PBD文件
+  visualize: True                      # 是否生成结构可视化
+
+# ==================生物计算专用====================
+bio_settings:
+  # 实验数据对接
+
+
+  # 分子动力学验证
+  md_simulation: 
+    enable: False
+
+
+  # 立体化学约束：
+  stereochemistry:
+    bond_length_tol: 0.1                   # 键长容差（埃）
+    bond_angle_tol: 5.0                    # 键角容差（埃）
+    clash_threshold: 0.8                   # 原子碰撞阈值（埃）
